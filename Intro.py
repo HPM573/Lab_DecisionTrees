@@ -1,5 +1,4 @@
 
-
 class ChanceNode:
 
     def __init__(self, probs, costs):
