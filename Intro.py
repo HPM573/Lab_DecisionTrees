@@ -6,6 +6,9 @@ class ChanceNode:
         self.costs = costs  # costs of outcomes
 
     def get_expected_cost(self):
+        """
+        :return: the expected cost of this chance node
+        """
         num_outcomes = len(self.probs) # number of outcomes
         exp_cost = 0 # expected cost initialized at 0
         for i in range(num_outcomes):
