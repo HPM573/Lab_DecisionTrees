@@ -33,7 +33,7 @@ class ChanceNode(Node):
         exp_cost = self.cost  # expected cost initialized with the cost of visiting the current node
         i = 0
         for node in self.futureNodes:
-            exp_cost += self.probs[i]*node.cost
+            exp_cost += self.probs[i]*node.get_expected_cost()
             i += 1
         return exp_cost
 
@@ -57,9 +57,9 @@ T3 = TerminalNode('T3', 30)
 T4 = TerminalNode('T4', 40)
 
 # create the future nodes of C2
-C2FutureNodes =[T1, T2, T3]
+C2FutureNodes = [T1, T2, T3]
 # create C2
-C2 = ChanceNode('C2', 15, C2FutureNodes, [0.1, 0.3, 0.7])
+C2 = ChanceNode('C2', 15, C2FutureNodes, [0.1, 0.2, 0.7])
 # create the future nodes of C1
 C1FutureNodes = [C2, T4]
 # create C1
