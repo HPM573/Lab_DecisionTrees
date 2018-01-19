@@ -57,7 +57,7 @@ T3 = TerminalNode('T3', 30)
 T4 = TerminalNode('T4', 40)
 
 # create the future nodes of C2
-C2FutureNodes =[T1, T2, T3]
+C2FutureNodes = [T1, T2, T3]
 # create C2
 C2 = ChanceNode('C2', 15, C2FutureNodes, [0.1, 0.3, 0.7])
 # create the future nodes of C1
