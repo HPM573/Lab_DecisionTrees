@@ -30,7 +30,7 @@ class ChanceNode(Node):
         """
         :return: expected cost of this chance node
         """
-        exp_cost = 0  # expected cost initialized at 0
+        exp_cost = self.cost  # expected cost initialized with the cost of visiting the current node
         i = 0
         for node in self.futureNodes:
             exp_cost += self.probs[i]*node.cost
