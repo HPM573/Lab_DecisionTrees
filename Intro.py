@@ -50,20 +50,41 @@ class TerminalNode(Node):
         return self.cost
 
 
+class DecisionNode(Node):
+
+    def __init__(self, name, cost, future_nodes):
+        Node.__init__(self, name, cost)
+        self.futureNode = future_nodes
+
+    def get_expected_costs(self):
+        """ returns the expected costs of future nodes"""
+        outcomes = dict() # dictionary to store the expected cost of future nodes along with their names as keys
+        for node in self.futureNode:
+            outcomes[node.name] = node.get_expected_cost()
+
+        return outcomes
+
+
+#######################
+# See figure DT3.png (from the project menu) for the structure of this decision tree
+########################
+
 # create the terminal nodes
 T1 = TerminalNode('T1', 10)
 T2 = TerminalNode('T2', 20)
 T3 = TerminalNode('T3', 30)
 T4 = TerminalNode('T4', 40)
+T5 = TerminalNode('T5', 50)
 
-# create the future nodes of C2
-C2FutureNodes = [T1, T2, T3]
 # create C2
-C2 = ChanceNode('C2', 15, C2FutureNodes, [0.1, 0.2, 0.7])
-# create the future nodes of C1
-C1FutureNodes = [C2, T4]
+C2 = ChanceNode('C2', 15, [T1, T2], [0.1, 0.9])
 # create C1
-C1 = ChanceNode('C1', 0, C1FutureNodes, [0.5, 0.5])
+C1 = ChanceNode('C1', 0, [C2, T3], [0.4, 0.6])
+# create C3
+C3 = ChanceNode('C3', 2, [T4, T5], [0.2, 0.8])
+
+# create D1
+D1 = DecisionNode('D1', 0, [C1, C3])
 
 # print the expect cost of C1
-print(C1.get_expected_cost())
+print(D1.get_expected_costs())
