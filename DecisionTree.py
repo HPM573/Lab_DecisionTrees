@@ -34,18 +34,32 @@ class ChanceNode(Node):
     def get_expected_cost(self):
         """
         :return: expected cost of this chance node
+        E[cost] = (cost of visiting this node)
+                  + sum_{i}(probability of future node i)*(E[cost of future node i])
         """
-        exp_cost = self.cost  # expected cost initialized with the cost of visiting the current node
+
+        # expected cost initialized with the cost of visiting the current node
+        exp_cost = self.cost
+
+        # go over all future nodes
         i = 0
         for node in self.futureNodes:
-            exp_cost += self.probs[i]*node.get_expected_cost()
+            # increment expected cost by
+            # (probability of visiting this future node) * (expected cost of this future node)
+            exp_cost += self.probs[i] * node.get_expected_cost()
             i += 1
+
         return exp_cost
 
 
 class TerminalNode(Node):
 
     def __init__(self, name, cost):
+        """
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        """
+
         Node.__init__(self, name, cost)
 
     def get_expected_cost(self):
