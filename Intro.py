@@ -1,17 +1,19 @@
 
 class Node:
-    """ base class """
+    """ base (master) class for node """
     def __init__(self, name, cost):
         """
         :param name: name of this node
-        :param cost: cost of this node
+        :param cost: cost of visiting this node
         """
+
         self.name = name
         self.cost = cost
 
     def get_expected_cost(self):
         """ abstract method to be overridden in derived classes
         :returns expected cost of this node """
+
         raise NotImplementedError("This is an abstract method and needs to be implemented in derived classes.")
 
 
@@ -19,9 +21,12 @@ class ChanceNode(Node):
 
     def __init__(self, name, cost, future_nodes, probs):
         """
+        :param name: name of this node
+        :param cost: cost of visiting this node
         :param future_nodes: future nodes connected to this node
         :param probs: probability of the future nodes
         """
+
         Node.__init__(self, name, cost)
         self.futureNodes = future_nodes
         self.probs = probs
@@ -29,23 +34,37 @@ class ChanceNode(Node):
     def get_expected_cost(self):
         """
         :return: expected cost of this chance node
+        E[cost] = (cost of visiting this node)
+                  + sum_{future nodes}(future node i)*(E[cost future node i])
         """
-        exp_cost = self.cost  # expected cost initialized with the cost of visiting the current node
+
+        # expected cost initialized with the cost of visiting the current node
+        exp_cost = self.cost
+
+        # go over all future nodes
         i = 0
         for node in self.futureNodes:
+            # increment expected cost by
+            # (probability of visiting this future node) * (expected cost of this future node)
             exp_cost += self.probs[i]*node.get_expected_cost()
             i += 1
+
         return exp_cost
 
 
 class TerminalNode(Node):
 
     def __init__(self, name, cost):
+        """
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        """
+
         Node.__init__(self, name, cost)
 
     def get_expected_cost(self):
         """
-        :return: cost of this chance node
+        :return: cost of this visiting this terminal node
         """
         return self.cost
 
@@ -53,16 +72,20 @@ class TerminalNode(Node):
 class DecisionNode(Node):
 
     def __init__(self, name, cost, future_nodes):
+
         Node.__init__(self, name, cost)
         self.futureNode = future_nodes
 
     def get_expected_costs(self):
-        """ returns the expected costs of future nodes"""
-        outcomes = dict() # dictionary to store the expected cost of future nodes along with their names as keys
-        for node in self.futureNode:
-            outcomes[node.name] = node.get_expected_cost()
+        """ returns the expected costs of future nodes
+        :return: a dictionary of expected costs of future nodes with node names as dictionary keys
+        """
 
-        return outcomes
+        exp_costs = dict()
+        for node in self.futureNode:
+            exp_costs[node.name] = node.get_expected_cost()
+
+        return exp_costs
 
 
 #######################
