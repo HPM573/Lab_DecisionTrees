@@ -35,7 +35,7 @@ class ChanceNode(Node):
         """
         :return: expected cost of this chance node
         E[cost] = (cost of visiting this node)
-                  + sum_{future nodes}(future node i)*(E[cost future node i])
+                  + sum_{i}(probabiilty of future node i)*(E[cost of future node i])
         """
 
         # expected cost initialized with the cost of visiting the current node
