@@ -87,7 +87,9 @@ class DecisionNode(Node):
         :return: a dictionary of expected costs of future nodes with node names as dictionary keys
         """
 
+        # a dictionary to store the expected cost of future nodes
         exp_costs = dict()
+        # go over all future nodes
         for node in self.futureNode:
             # add the expected cost of this future node to the dictionary
             exp_costs[node.name] = self.cost + node.get_expected_cost()
