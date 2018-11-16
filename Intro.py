@@ -1,17 +1,19 @@
 
 class Node:
-    """ base class """
+    """ base (master) class for nodes """
     def __init__(self, name, cost):
         """
         :param name: name of this node
         :param cost: cost of this node
         """
+
         self.name = name
         self.cost = cost
 
     def get_expected_cost(self):
         """ abstract method to be overridden in derived classes
         :returns expected cost of this node """
+
         raise NotImplementedError("This is an abstract method and needs to be implemented in derived classes.")
 
 
@@ -19,9 +21,12 @@ class ChanceNode(Node):
 
     def __init__(self, name, cost, future_nodes, probs):
         """
-        :param future_nodes: future nodes connected to this node
-        :param probs: probability of the future nodes
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        :param future_nodes: (list) future nodes connected to this node
+        :param probs: (list) probability of future nodes
         """
+
         Node.__init__(self, name, cost)
         self.futureNodes = future_nodes
         self.probs = probs
