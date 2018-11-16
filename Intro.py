@@ -1,34 +1,55 @@
 
 class ChanceNode:
     def __init__(self, name, cost, future_nodes, probs):
+        """
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        :param future_nodes: (list) future nodes connected to this node
+        :param probs: (list) probability of future nodes
+        """
+
         self.name = name
-        self.cost = cost # cost of visiting this node
-        self.future_nodes = future_nodes  # list of future nodes
-        self.probs = probs  # probabilities of outcomes
+        self.cost = cost
+        self.future_nodes = future_nodes
+        self.probs = probs
 
     def get_expected_cost(self):
         """
         :return: the expected cost of this chance node
+        E[cost] = (cost of visiting this node)
+                  + sum_{i}(probability of future node i)*(E[cost future node i])
         """
-        exp_cost = self.cost  # expected cost initialized with the cost of visiting this node
-        i = 0  # index to iterate over probabilities
+
+        # expected cost initialized with the cost of visiting the current node
+        exp_cost = self.cost
+
+        # calculate expected cost
+        i = 0
         for thisNode in self.future_nodes:
+            # increment expected cost by
+            # (probability of visiting this future node) * (expected cost of this future node)
             if type(thisNode) == ChanceNode:
                 exp_cost += self.probs[i] * thisNode.get_expected_cost()
             elif type(thisNode) == TerminalNode:
                 exp_cost += self.probs[i] * thisNode.get_cost()
             i += 1
+
         return exp_cost
 
 
 class TerminalNode:
     def __init__(self, name, cost):
+        """
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        """
+
         self.name = name
-        self.cost = cost  # cost of this terminal node
+        self.cost = cost
 
     def get_cost(self):
         """
-        :return: the cost of this terminal node
+        :return: the cost of visiting this terminal node
         """
         return self.cost
 
