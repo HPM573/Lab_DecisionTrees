@@ -2,16 +2,24 @@
 class ChanceNode:
 
     def __init__(self, probs, costs):
-        self.probs = probs  # probabilities of outcomes
-        self.costs = costs  # costs of outcomes
+        """
+        :param probs: (list) probability of outcomes
+        :param costs: (list) costs of outcomes
+        """
+        self.probs = probs
+        self.costs = costs
 
     def get_expected_cost(self):
         """
         :return: the expected cost of this chance node
         """
+
         num_outcomes = len(self.probs) # number of outcomes
-        exp_cost = 0 # expected cost initialized at 0
+        exp_cost = 0 # expected cost initialized to be 0
+
+        # go over possible outcomes
         for i in range(num_outcomes):
+            # increment expected cost by (probability of this outcome) * (cost of this outcome)
             exp_cost += self.probs[i] * self.costs[i]
 
         return exp_cost
