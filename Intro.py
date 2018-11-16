@@ -23,8 +23,8 @@ class ChanceNode(Node):
         """
         :param name: name of this node
         :param cost: cost of visiting this node
-        :param future_nodes: future nodes connected to this node
-        :param probs: probability of the future nodes
+        :param future_nodes: (list) future nodes connected to this node
+        :param probs: (list) probability of future nodes
         """
 
         Node.__init__(self, name, cost)
@@ -72,6 +72,12 @@ class TerminalNode(Node):
 class DecisionNode(Node):
 
     def __init__(self, name, cost, future_nodes):
+        """
+        :param name: name of this node
+        :param cost: cost of visiting this node
+        :param future_nodes: (list) future nodes connected to this node
+        (assumes that future nodes can only be chance or terminal nodes)
+        """
 
         Node.__init__(self, name, cost)
         self.futureNode = future_nodes
@@ -83,7 +89,8 @@ class DecisionNode(Node):
 
         exp_costs = dict()
         for node in self.futureNode:
-            exp_costs[node.name] = node.get_expected_cost()
+            # add the expected cost of this future node to the dictionary
+            exp_costs[node.name] = self.cost + node.get_expected_cost()
 
         return exp_costs
 
