@@ -14,8 +14,6 @@ class Node:
         """ abstract method to be overridden in derived classes
         :returns expected cost of this node """
 
-        raise NotImplementedError("This is an abstract method and needs to be implemented in derived classes.")
-
 
 class ChanceNode(Node):
 
