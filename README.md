@@ -1,1 +1,1 @@
-# Introduction to object-oriented programming
+# Lab: Introduction to Object-Oriented Programming (OOP)
