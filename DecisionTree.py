@@ -4,7 +4,7 @@ class Node:
     def __init__(self, name, cost):
         """
         :param name: name of this node
-        :param cost: cost of this node
+        :param cost: cost of visiting this node
         """
 
         self.name = name
