@@ -62,7 +62,7 @@ class TerminalNode(Node):
 
     def get_expected_cost(self):
         """
-        :return: cost of this chance node
+        :return: cost of this terminal node
         """
         return self.cost
 
