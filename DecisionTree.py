@@ -68,19 +68,14 @@ class TerminalNode(Node):
 
 
 # create the terminal nodes
-T1 = TerminalNode('T1', 10)
-T2 = TerminalNode('T2', 20)
-T3 = TerminalNode('T3', 30)
-T4 = TerminalNode('T4', 40)
-
-# create the future nodes of C2
-C2FutureNodes = [T1, T2, T3]
+T1 = TerminalNode('T1', cost=10)
+T2 = TerminalNode('T2', cost=20)
+T3 = TerminalNode('T3', cost=30)
+T4 = TerminalNode('T4', cost=40)
 # create C2
-C2 = ChanceNode('C2', 15, C2FutureNodes, [0.1, 0.2, 0.7])
-# create the future nodes of C1
-C1FutureNodes = [C2, T4]
+C2 = ChanceNode('C2', cost=15, future_nodes=[T1, T2, T3], probs=[0.1, 0.2, 0.7])
 # create C1
-C1 = ChanceNode('C1', 0, C1FutureNodes, [0.5, 0.5])
+C1 = ChanceNode('C1', cost=0, future_nodes=[C2, T4], probs=[0.5, 0.5])
 
 # print the expect cost of C1
 print(C1.get_expected_cost())
