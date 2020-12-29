@@ -100,20 +100,20 @@ class DecisionNode(Node):
 ########################
 
 # create the terminal nodes
-T1 = TerminalNode('T1', cost=10)
-T2 = TerminalNode('T2', cost=20)
-T3 = TerminalNode('T3', cost=30)
-T4 = TerminalNode('T4', cost=40)
-T5 = TerminalNode('T5', cost=50)
-T6 = TerminalNode('T6', cost=60)
+T1 = TerminalNode(name='T1', cost=10)
+T2 = TerminalNode(name='T2', cost=20)
+T3 = TerminalNode(name='T3', cost=30)
+T4 = TerminalNode(name='T4', cost=40)
+T5 = TerminalNode(name='T5', cost=50)
+T6 = TerminalNode(name='T6', cost=60)
 # create C2
-C2 = ChanceNode('C2', cost=15, future_nodes=[T1, T2, T3], probs=[0.7, 0.1, 0.2])
+C2 = ChanceNode(name='C2', cost=15, future_nodes=[T1, T2, T3], probs=[0.7, 0.1, 0.2])
 # create C1
-C1 = ChanceNode('C1', cost=25, future_nodes=[C2, T4], probs=[0.4, 0.6])
+C1 = ChanceNode(name='C1', cost=25, future_nodes=[C2, T4], probs=[0.4, 0.6])
 # create C3
-C3 = ChanceNode('C3', cost=50, future_nodes=[T5, T6], probs=[0.2, 0.8])
+C3 = ChanceNode(name='C3', cost=50, future_nodes=[T5, T6], probs=[0.2, 0.8])
 # create D1
-D1 = DecisionNode('D1', 0, [C1, C3])
+D1 = DecisionNode(name='D1', cost=0, future_nodes=[C1, C3])
 
 # print the expect cost of C1 and C3
 print(D1.get_expected_costs())
