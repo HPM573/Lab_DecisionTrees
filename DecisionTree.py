@@ -28,9 +28,9 @@ class ChanceNode:
         for thisNode in self.future_nodes:
             # increment expected cost by
             # (probability of visiting this future node) * (expected cost of this future node)
-            if type(thisNode) == ChanceNode:
+            if type(thisNode) is ChanceNode:
                 exp_cost += self.probs[i] * thisNode.get_expected_cost()
-            elif type(thisNode) == TerminalNode:
+            elif type(thisNode) is TerminalNode:
                 exp_cost += self.probs[i] * thisNode.get_cost()
             i += 1
 
