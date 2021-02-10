@@ -10,7 +10,7 @@ class ChanceNode:
 
         self.name = name
         self.cost = cost
-        self.future_nodes = future_nodes
+        self.futureNodes = future_nodes
         self.probs = probs
 
     def get_expected_cost(self):
@@ -25,7 +25,7 @@ class ChanceNode:
 
         # calculate expected cost
         i = 0
-        for thisNode in self.future_nodes:
+        for thisNode in self.futureNodes:
             # increment expected cost by
             # (probability of visiting this future node) * (expected cost of this future node)
             if type(thisNode) is ChanceNode:
