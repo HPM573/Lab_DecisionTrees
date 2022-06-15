@@ -1,6 +1,6 @@
 
 class Node:
-    """ base (master) class for nodes """
+    """ base (super) class for nodes to implement the common attributes """
     def __init__(self, name, cost):
         """
         :param name: name of this node
@@ -25,7 +25,7 @@ class ChanceNode(Node):
         :param probs: (list) probability of future nodes
         """
 
-        Node.__init__(self, name, cost)
+        Node.__init__(self, name, cost)  # to initialize the base class
         self.futureNodes = future_nodes
         self.probs = probs
 
@@ -36,16 +36,12 @@ class ChanceNode(Node):
                   + sum_{i}(probability of future node i)*(E[cost of future node i])
         """
 
-        # expected cost initialized with the cost of visiting the current node
-        exp_cost = self.cost
+        num_outcomes = len(self.probs)  # number of outcomes
+        exp_cost = self.cost  # initialize with the cost of this node
 
-        # go over all future nodes
-        i = 0
-        for node in self.futureNodes:
-            # increment expected cost by
-            # (probability of visiting this future node) * (expected cost of this future node)
-            exp_cost += self.probs[i] * node.get_expected_cost()
-            i += 1
+        # go over possible outcomes
+        for i in range(num_outcomes) :
+            exp_cost += self.probs[i] * self.futureNodes[i].get_expected_cost()
 
         return exp_cost
 
@@ -58,7 +54,7 @@ class TerminalNode(Node):
         :param cost: cost of visiting this node
         """
 
-        Node.__init__(self, name, cost)
+        Node.__init__(self, name, cost) # to initialize the base class
 
     def get_expected_cost(self):
         """
@@ -77,5 +73,5 @@ C2 = ChanceNode('C2', cost=15, future_nodes=[T1, T2, T3], probs=[0.1, 0.2, 0.7])
 # create C1
 C1 = ChanceNode('C1', cost=0, future_nodes=[C2, T4], probs=[0.5, 0.5])
 
-# print the expect cost of C1
+# print the expected cost of C1
 print(C1.get_expected_cost())
