@@ -36,16 +36,12 @@ class ChanceNode(Node):
                   + sum_{i}(probability of future node i)*(E[cost of future node i])
         """
 
-        # expected cost initialized with the cost of visiting the current node
-        exp_cost = self.cost
+        num_outcomes = len(self.probs)  # number of outcomes
+        exp_cost = self.cost  # initialize with the cost of this node
 
-        # go over all future nodes
-        i = 0
-        for node in self.futureNodes:
-            # increment expected cost by
-            # (probability of visiting this future node) * (expected cost of this future node)
-            exp_cost += self.probs[i]*node.get_expected_cost()
-            i += 1
+        # go over possible outcomes
+        for i in range(num_outcomes) :
+            exp_cost += self.probs[i] * self.futureNodes[i].get_expected_cost()
 
         return exp_cost
 
