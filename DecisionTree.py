@@ -111,5 +111,5 @@ C3 = ChanceNode(name='C3', cost=50, future_nodes=[T5, T6], probs=[0.2, 0.8])
 # create D1
 D1 = DecisionNode(name='D1', cost=0, future_nodes=[C1, C3])
 
-# print the expect cost of C1 and C3
+# print the expected cost of C1 and C3
 print(D1.get_expected_costs())
