@@ -64,5 +64,5 @@ C2 = ChanceNode(name='C2', cost=15, future_nodes=[T1, T2, T3], probs=[0.1, 0.2, 
 # create C1
 C1 = ChanceNode(name='C1', cost=0, future_nodes=[C2, T4], probs=[0.5, 0.5])
 
-# print the expect cost of C1
+# print the expected cost of C1
 print(C1.get_expected_cost())
