@@ -27,5 +27,5 @@ class ChanceNode:
 
 # create an instance of ChanceNode
 myChanceNode = ChanceNode(probs=[0.1, 0.2, 0.7], costs=[10, 20, 30])
-# print the expect cost of this chance node
+# print the expected cost of this chance node
 print(myChanceNode.get_expected_cost())
