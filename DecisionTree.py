@@ -1,6 +1,6 @@
 
 class Node:
-    """ base (master) class for nodes """
+    """ base (parent) class for nodes """
     def __init__(self, name, cost):
         """
         :param name: name of this node
