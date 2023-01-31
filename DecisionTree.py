@@ -1,6 +1,6 @@
 
 class Node:
-    """ base (super) class for nodes to implement the common attributes """
+    """ base (parent) class for nodes to implement the common attributes """
     def __init__(self, name, cost):
         """
         :param name: name of this node
