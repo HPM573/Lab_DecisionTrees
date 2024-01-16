@@ -14,8 +14,8 @@ class ChanceNode:
         :return: the expected cost of this chance node
         """
 
-        num_outcomes = len(self.probs) # number of outcomes
-        exp_cost = 0 # expected cost initialized to be 0
+        num_outcomes = len(self.probs)  # number of outcomes
+        exp_cost = 0  # expected cost initialized to be 0
 
         # go over possible outcomes
         for i in range(num_outcomes):
